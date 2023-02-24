@@ -6,7 +6,7 @@ class TextMoreData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SliverPadding(
-      padding: EdgeInsets.fromLTRB(16, 50, 16, 16),
+      padding: EdgeInsets.fromLTRB(16, 30, 16, 16),
       sliver: SliverToBoxAdapter(
         child: Text(
           'Explore\nMore',

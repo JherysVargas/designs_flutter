@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 import 'package:designs_flutter/sklep_ecommerce_view/models/category_model.dart';
 import 'package:designs_flutter/sklep_ecommerce_view/widgets/custom_button.dart';
 
@@ -33,15 +34,12 @@ class ListCategories extends StatefulWidget {
 }
 
 class _ListCategoriesState extends State<ListCategories> {
-  final ScrollController _controller = ScrollController();
-
   @override
   Widget build(BuildContext context) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: SliverTabsPersist(
-        ListView.separated(
-          controller: _controller,
+    return SliverPinnedHeader(
+      child: SizedBox(
+        height: 90,
+        child: ListView.separated(
           itemCount: categories.length,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
           scrollDirection: Axis.horizontal,
@@ -64,27 +62,5 @@ class _ListCategoriesState extends State<ListCategories> {
         ),
       ),
     );
-  }
-}
-
-class SliverTabsPersist extends SliverPersistentHeaderDelegate {
-  SliverTabsPersist(this.child);
-
-  final Widget child;
-
-  @override
-  double get minExtent => 90;
-  @override
-  double get maxExtent => 90;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return child;
-  }
-
-  @override
-  bool shouldRebuild(SliverTabsPersist oldDelegate) {
-    return false;
   }
 }
