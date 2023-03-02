@@ -12,7 +12,7 @@ class TopSales extends StatelessWidget {
     return MultiSliver(
       children: [
         const SliverPadding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          padding: EdgeInsets.fromLTRB(23, 20, 23, 0),
           sliver: SliverToBoxAdapter(
             child: Text(
               'Top Sales',

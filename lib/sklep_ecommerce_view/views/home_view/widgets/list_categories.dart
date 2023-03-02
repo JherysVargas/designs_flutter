@@ -26,7 +26,12 @@ const List<CategoryModel> categories = [
 ];
 
 class ListCategories extends StatefulWidget {
-  const ListCategories({super.key});
+  const ListCategories({
+    super.key,
+    required this.animation,
+  });
+
+  final Animation<double> animation;
 
   @override
   State<ListCategories> createState() => _ListCategoriesState();
@@ -38,26 +43,34 @@ class _ListCategoriesState extends State<ListCategories> {
     return SliverPersistentHeader(
       pinned: true,
       delegate: SliverTabsPersist(
-        ListView.separated(
-          itemCount: categories.length,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-          scrollDirection: Axis.horizontal,
-          separatorBuilder: (BuildContext _, int __) {
-            return const SizedBox(width: 20);
-          },
-          itemBuilder: (BuildContext _, int index) {
-            final CategoryModel category = categories[index];
-            return CustomButton(
-              radius: 25,
-              text: category.name,
-              backgroundColorLeading: Colors.grey[200],
-              leading: Image.network(
-                category.image,
-                fit: BoxFit.contain,
-                alignment: Alignment.center,
-              ),
-            );
-          },
+        Container(
+          color: Color.lerp(
+            const Color.fromARGB(10, 210, 134, 255),
+            const Color.fromARGB(255, 196, 94, 254),
+            widget.animation.value,
+          ),
+          child: ListView.separated(
+            itemCount: categories.length,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (BuildContext _, int __) {
+              return const SizedBox(width: 20);
+            },
+            itemBuilder: (BuildContext _, int index) {
+              final CategoryModel category = categories[index];
+              return CustomButton(
+                radius: 25,
+                text: category.name,
+                labelPadding: const EdgeInsets.all(12),
+                backgroundColorAvatar: Colors.grey[200],
+                avatar: Image.network(
+                  category.image,
+                  fit: BoxFit.contain,
+                  alignment: Alignment.center,
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -82,6 +95,6 @@ class SliverTabsPersist extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverTabsPersist oldDelegate) {
-    return false;
+    return true;
   }
 }

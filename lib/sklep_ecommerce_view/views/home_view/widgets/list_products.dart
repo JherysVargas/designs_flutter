@@ -51,7 +51,12 @@ class ListProducts extends StatelessWidget {
               return const SizedBox(width: 20);
             },
             separatorBuilder: (BuildContext _, int index) {
-              return ItemProduct(product: products[index]);
+              final ProductModel product = products[index];
+              return ItemProduct(
+                product: product.copyWith(
+                  heroTag: "${product.name}-${hashCode + index}",
+                ),
+              );
             },
           ),
         ),

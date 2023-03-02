@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:designs_flutter/sklep_ecommerce_view/widgets/navigation_bar.dart';
 import 'package:designs_flutter/sklep_ecommerce_view/widgets/background_gradient.dart';
@@ -15,58 +17,77 @@ class SklepEcommerceHome extends StatefulWidget {
   State<SklepEcommerceHome> createState() => _SklepEcommerceHomeState();
 }
 
-class _SklepEcommerceHomeState extends State<SklepEcommerceHome> {
-  final ScrollController _controller = ScrollController();
-  final ValueNotifier<double> opacity = ValueNotifier(1);
+class _SklepEcommerceHomeState extends State<SklepEcommerceHome>
+    with SingleTickerProviderStateMixin {
+  final ScrollController _scrollController = ScrollController();
+
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 400),
+  );
+
+  late final Animation<double> animationColor = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeIn,
+  );
+
+  late final Animation<double> animationOpacity = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeIn,
+  );
 
   @override
   void initState() {
     super.initState();
-    _controller.addListener(_scrollListener);
+    _scrollController.addListener(_scrollListener);
   }
 
   @override
   void dispose() {
-    _controller.removeListener(_scrollListener);
+    _scrollController.removeListener(_scrollListener);
+    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
   void _scrollListener() {
+    final double offset = (_scrollController.offset / .5);
     final double percentage =
-        (_controller.position.maxScrollExtent - (_controller.offset * 10))
-            .clamp(0, 1);
+        (offset / _scrollController.position.maxScrollExtent).clamp(0, 1);
 
-    opacity.value = percentage;
+    _controller.value = percentage;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: BackgroundGradient(
-        stops: const [.1, .25, .6],
-        colors: const [
-          Color.fromARGB(255, 196, 94, 254),
-          Color.fromARGB(255, 210, 134, 255),
-          Color.fromARGB(255, 246, 246, 246)
-        ],
-        child: CustomScrollView(
-          controller: _controller,
-          slivers: [
-            const AppBarSklep(),
-            ValueListenableBuilder<double>(
-              valueListenable: opacity,
-              builder: (_, value, __) {
-                return TextMoreData(opacity: value);
-              },
+      body: AnimatedBuilder(
+        animation: _controller,
+        builder: (BuildContext _, Widget? __) {
+          return BackgroundGradient(
+            stops: [.1, .22, lerpDouble(.6, .2, animationColor.value)!],
+            colors: const [
+              Color.fromARGB(255, 196, 94, 254),
+              Color.fromARGB(255, 210, 134, 255),
+              Color.fromARGB(255, 246, 246, 246)
+            ],
+            child: CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                AppBarSklep(animation: animationColor),
+                TextMoreData(
+                  opacity: (1 - (animationOpacity.value * 10)).clamp(0, 1),
+                ),
+                ListCategories(animation: animationColor),
+                const ListProducts(),
+                const TopSales(),
+              ],
             ),
-            const ListCategories(),
-            const ListProducts(),
-            const TopSales(),
-          ],
-        ),
+          );
+        },
       ),
-      bottomNavigationBar: const BottomNavigation(currentPage: 1),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

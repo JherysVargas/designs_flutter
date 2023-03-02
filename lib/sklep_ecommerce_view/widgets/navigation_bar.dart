@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:designs_flutter/sklep_ecommerce_view/models/item_bottom_bar_model.dart';
 
-const List<IconData> pages = [
-  Icons.shopping_bag_outlined,
-  Icons.home_filled,
-  Icons.favorite_border_outlined,
-  Icons.person_outlined
+const List<ItemBottomBarModel> pages = [
+  ItemBottomBarModel(
+    iconFilled: Icons.shopping_bag,
+    iconOutline: Icons.shopping_bag_outlined,
+  ),
+  ItemBottomBarModel(
+    iconFilled: Icons.home_rounded,
+    iconOutline: Icons.home_outlined,
+  ),
+  ItemBottomBarModel(
+    iconFilled: Icons.favorite_rounded,
+    iconOutline: Icons.favorite_outline_rounded,
+  ),
+  ItemBottomBarModel(
+    iconFilled: Icons.person,
+    iconOutline: Icons.person_outlined,
+  ),
 ];
 
-class BottomNavigation extends StatelessWidget {
-  final int? currentPage;
-  final void Function(int)? onChangeTab;
+class BottomNavigation extends StatefulWidget {
+  const BottomNavigation({Key? key}) : super(key: key);
 
-  const BottomNavigation({
-    Key? key,
-    this.onChangeTab,
-    this.currentPage = 0,
-  }) : super(key: key);
+  @override
+  State<BottomNavigation> createState() => _BottomNavigationState();
+}
+
+class _BottomNavigationState extends State<BottomNavigation> {
+  final ValueNotifier<int> currentPage = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
@@ -48,26 +61,39 @@ class BottomNavigation extends StatelessWidget {
   }
 
   Widget _buildItem(int index) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: index == currentPage
-            ? const LinearGradient(
-                colors: [
-                  Color(0xFFfe867a),
-                  Color(0xFFfedb62),
-                ],
-              )
-            : null,
-      ),
-      child: CircleAvatar(
-        radius: 24,
-        backgroundColor: Colors.transparent,
-        child: Icon(
-          pages[index],
-          color: index == currentPage ? Colors.white : Colors.grey[350],
-        ),
-      ),
+    return ValueListenableBuilder<int>(
+      valueListenable: currentPage,
+      builder: (BuildContext _, int value, Widget? __) {
+        final bool isSelected = (index == value);
+
+        return InkWell(
+          onTap: () {
+            currentPage.value = index;
+          },
+          child: AnimatedContainer(
+            duration: kThemeAnimationDuration,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: isSelected
+                  ? const LinearGradient(
+                      colors: [
+                        Color(0xFFfe867a),
+                        Color(0xFFfedb62),
+                      ],
+                    )
+                  : null,
+            ),
+            child: CircleAvatar(
+              radius: 24,
+              backgroundColor: Colors.transparent,
+              child: Icon(
+                isSelected ? pages[index].iconFilled : pages[index].iconOutline,
+                color: isSelected ? Colors.white : Colors.grey[350],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

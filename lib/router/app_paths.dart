@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:designs_flutter/main_view.dart';
 import 'package:designs_flutter/sklep_ecommerce_view/views/home_view/home.dart';
+import 'package:designs_flutter/sklep_ecommerce_view/views/detail_product_view/detail_product.dart';
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -10,6 +11,10 @@ class RouterGenerator {
       ),
       '/sklepEcommerce': MaterialPageRoute(
         builder: (_) => const SklepEcommerceHome(),
+      ),
+      '/detailProductsklepEcommerce': MaterialPageRoute(
+        builder: (_) => const DetailProductSklepEcommerceHome(),
+        settings: settings,
       ),
     };
 

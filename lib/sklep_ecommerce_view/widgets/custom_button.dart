@@ -6,64 +6,58 @@ class CustomButton extends StatelessWidget {
     required this.text,
     this.radius = 22,
     this.richText = '',
-    this.backgroundColorLeading,
     this.onTap,
-    this.leading,
+    this.avatar,
     this.textStyle,
     this.richTextStyle,
+    this.backgroundColorAvatar,
+    this.labelPadding = const EdgeInsets.all(10),
   });
 
   final String text;
   final String? richText;
   final double? radius;
-  final Widget? leading;
+  final EdgeInsetsGeometry? labelPadding;
+  final Widget? avatar;
   final VoidCallback? onTap;
   final TextStyle? textStyle;
   final TextStyle? richTextStyle;
-  final Color? backgroundColorLeading;
+  final Color? backgroundColorAvatar;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: const EdgeInsets.fromLTRB(4, 4, 16, 4),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(100),
+    return ActionChip(
+      elevation: 0,
+      pressElevation: 0,
+      onPressed: () {
+        onTap?.call();
+      },
+      labelPadding: labelPadding,
+      avatar: CircleAvatar(
+        radius: radius,
+        backgroundColor: backgroundColorAvatar ?? Colors.amber[200],
+        child: avatar,
       ),
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 8,
-        children: [
-          InkWell(
-            onTap: onTap,
-            child: CircleAvatar(
-              radius: radius,
-              backgroundColor: backgroundColorLeading ?? Colors.amber[200],
-              child: leading,
-            ),
-          ),
-          Text.rich(
+      backgroundColor: Colors.white,
+      label: Text.rich(
+        TextSpan(
+          text: text,
+          children: [
             TextSpan(
-              text: text,
-              children: [
-                TextSpan(
-                  text: richText,
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w600,
-                  ).merge(richTextStyle),
-                )
-              ],
-            ),
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 15,
-              color: Colors.black,
-              fontWeight: FontWeight.w800,
-            ).merge(textStyle),
-          )
-        ],
+              text: richText,
+              style: const TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.w600,
+              ).merge(richTextStyle),
+            )
+          ],
+        ),
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 15,
+          color: Colors.black,
+          fontWeight: FontWeight.w800,
+        ).merge(textStyle),
       ),
     );
   }

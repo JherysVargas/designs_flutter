@@ -10,6 +10,7 @@ class TextMoreData extends StatelessWidget {
     return SliverAnimatedOpacity(
       duration: kThemeAnimationDuration,
       opacity: opacity,
+      curve: Curves.easeOut,
       sliver: const SliverPadding(
         padding: EdgeInsets.fromLTRB(16, 30, 16, 16),
         sliver: SliverToBoxAdapter(
