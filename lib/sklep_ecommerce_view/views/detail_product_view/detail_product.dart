@@ -26,6 +26,7 @@ class DetailProductSklepEcommerceHome extends StatelessWidget {
       extendBody: true,
       appBar: AppBar(
         elevation: 0,
+        toolbarHeight: kToolbarHeight + 20,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         title: const AppBarDetailProduct(),

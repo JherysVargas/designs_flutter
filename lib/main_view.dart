@@ -14,9 +14,10 @@ class MainView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _buildButton(
-                context: context,
-                route: '/sklepEcommerce',
-                text: 'Skelp Ecommerce')
+              context: context,
+              route: '/sklepEcommerce',
+              text: 'Skelp Ecommerce',
+            )
           ],
         ),
       ),

@@ -16,6 +16,7 @@ class AppBarSklep extends StatelessWidget {
       ),
       elevation: 0,
       automaticallyImplyLeading: false,
+      toolbarHeight: kToolbarHeight + 20,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: const [
