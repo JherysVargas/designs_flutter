@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-class TextMoreData extends StatelessWidget {
-  const TextMoreData({super.key, required this.opacity});
+class TextMoreData extends AnimatedWidget {
+  const TextMoreData({
+    super.key,
+    required AnimationController controller,
+  }) : super(listenable: controller);
 
-  final double opacity;
+  Animation<double> get _progress => listenable as Animation<double>;
 
   @override
   Widget build(BuildContext context) {
     return SliverAnimatedOpacity(
       duration: kThemeAnimationDuration,
-      opacity: opacity,
+      opacity: (1 - (_progress.value * 10)).clamp(0, 1),
       curve: Curves.easeOut,
       sliver: const SliverPadding(
         padding: EdgeInsets.fromLTRB(16, 30, 16, 16),

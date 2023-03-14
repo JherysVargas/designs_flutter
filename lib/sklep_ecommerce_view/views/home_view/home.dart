@@ -26,16 +26,6 @@ class _SklepEcommerceHomeState extends State<SklepEcommerceHome>
     duration: const Duration(milliseconds: 400),
   );
 
-  late final Animation<double> animationColor = CurvedAnimation(
-    parent: _controller,
-    curve: Curves.easeIn,
-  );
-
-  late final Animation<double> animationOpacity = CurvedAnimation(
-    parent: _controller,
-    curve: Curves.easeIn,
-  );
-
   @override
   void initState() {
     super.initState();
@@ -51,11 +41,8 @@ class _SklepEcommerceHomeState extends State<SklepEcommerceHome>
   }
 
   void _scrollListener() {
-    final double offset = (_scrollController.offset / .5);
-    final double percentage =
-        (offset / _scrollController.position.maxScrollExtent).clamp(0, 1);
-
-    _controller.value = percentage;
+    _controller.value =
+        _scrollController.offset / _scrollController.position.maxScrollExtent;
   }
 
   @override
@@ -66,7 +53,7 @@ class _SklepEcommerceHomeState extends State<SklepEcommerceHome>
         animation: _controller,
         builder: (BuildContext _, Widget? __) {
           return BackgroundGradient(
-            stops: [.1, .22, lerpDouble(.6, .2, animationColor.value)!],
+            stops: [.1, .22, lerpDouble(.6, .2, _controller.value)!],
             colors: const [
               Color.fromARGB(255, 196, 94, 254),
               Color.fromARGB(255, 210, 134, 255),
@@ -75,11 +62,9 @@ class _SklepEcommerceHomeState extends State<SklepEcommerceHome>
             child: CustomScrollView(
               controller: _scrollController,
               slivers: [
-                AppBarSklep(animation: animationColor),
-                TextMoreData(
-                  opacity: (1 - (animationOpacity.value * 10)).clamp(0, 1),
-                ),
-                ListCategories(animation: animationColor),
+                AppBarSklep(controller: _controller),
+                TextMoreData(controller: _controller),
+                ListCategories(controller: _controller),
                 const ListProducts(),
                 const TopSales(),
               ],

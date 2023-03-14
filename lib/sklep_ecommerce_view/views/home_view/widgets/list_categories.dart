@@ -25,19 +25,14 @@ const List<CategoryModel> categories = [
   ),
 ];
 
-class ListCategories extends StatefulWidget {
+class ListCategories extends AnimatedWidget {
   const ListCategories({
     super.key,
-    required this.animation,
-  });
+    required AnimationController controller,
+  }) : super(listenable: controller);
 
-  final Animation<double> animation;
+  Animation<double> get _progress => listenable as Animation<double>;
 
-  @override
-  State<ListCategories> createState() => _ListCategoriesState();
-}
-
-class _ListCategoriesState extends State<ListCategories> {
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
@@ -45,9 +40,9 @@ class _ListCategoriesState extends State<ListCategories> {
       delegate: SliverTabsPersist(
         Container(
           color: Color.lerp(
-            const Color.fromARGB(10, 210, 134, 255),
+            const Color.fromARGB(0, 210, 134, 255),
             const Color.fromARGB(255, 196, 94, 254),
-            widget.animation.value,
+            _progress.value / .6,
           ),
           child: ListView.separated(
             itemCount: categories.length,

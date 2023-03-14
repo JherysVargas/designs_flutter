@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:designs_flutter/sklep_ecommerce_view/widgets/custom_button.dart';
 
-class AppBarSklep extends StatelessWidget {
-  const AppBarSklep({super.key, required this.animation});
+class AppBarSklep extends AnimatedWidget {
+  const AppBarSklep({
+    super.key,
+    required AnimationController controller,
+  }) : super(listenable: controller);
 
-  final Animation<double> animation;
+  Animation<double> get _progress => listenable as Animation<double>;
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       backgroundColor: Color.lerp(
-        const Color.fromARGB(0, 196, 94, 254),
+        const Color.fromARGB(0, 210, 134, 255),
         const Color.fromARGB(255, 196, 94, 254),
-        animation.value,
+        _progress.value / .6,
       ),
       elevation: 0,
       automaticallyImplyLeading: false,

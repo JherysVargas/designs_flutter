@@ -12,8 +12,15 @@ class RouterGenerator {
       '/sklepEcommerce': MaterialPageRoute(
         builder: (_) => const SklepEcommerceHome(),
       ),
-      '/detailProductsklepEcommerce': MaterialPageRoute(
-        builder: (_) => const DetailProductSklepEcommerceHome(),
+      '/detailProductsklepEcommerce': PageRouteBuilder(
+        pageBuilder: (_, __, ___) => const DetailProductSklepEcommerceHome(),
+        transitionsBuilder: (_, animation, __, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 350),
         settings: settings,
       ),
     };
