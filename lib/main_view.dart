@@ -17,6 +17,11 @@ class MainView extends StatelessWidget {
               context: context,
               route: '/sklepEcommerce',
               text: 'Skelp Ecommerce',
+            ),
+            _buildButton(
+              context: context,
+              route: '/banking',
+              text: 'Banking',
             )
           ],
         ),

@@ -54,7 +54,8 @@ class ListProducts extends StatelessWidget {
               final ProductModel product = products[index];
               return ItemProduct(
                 product: product.copyWith(
-                  heroTag: "${product.name}-${hashCode + index}",
+                  heroTag:
+                      "${product.name}-${(product.hashCode * hashCode) + index}",
                 ),
               );
             },
