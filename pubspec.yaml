@@ -35,6 +35,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   sliver_tools: ^0.2.9
+  flutter_vector_icons: ^2.0.0
+  jiffy: ^6.2.2
 
 dev_dependencies:
   flutter_test:

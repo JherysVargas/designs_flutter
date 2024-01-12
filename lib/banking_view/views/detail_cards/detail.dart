@@ -8,7 +8,7 @@ class DetailCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(surfaceTintColor: Colors.white),
       body: ListView.separated(
         separatorBuilder: (context, index) => const SizedBox(height: spacing),
         padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
