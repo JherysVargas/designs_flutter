@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'router/router.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SklepEcommerceApp extends StatelessWidget {
+  const SklepEcommerceApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Sklep Ecommerce App',
       theme: ThemeData(primarySwatch: Colors.blue),
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: RouterGeneralAppGenerator.generateRoute,
+      onGenerateRoute: RouterSklepEcommerceAppGenerator.generateRoute,
     );
   }
 }
