@@ -27,13 +27,13 @@ Personal project to capture designs for mobile apps in projects made with flutte
   <tbody>
     <tr>
       <td align="center">
-        <img width="250px" alt="Example iOS" src="./examples/sklep_ecommerce/sklep_ecommerce_example_ios.gif" />
+        <img width="250px" alt="Example iOS" src="https://drive.google.com/uc?export=view&id=1k4ZqRXX04VHc4rb1qtDsWC0GrQmGNCpg" />
         <p>
           iOS
         </p>
       </td>
       <td align="center">
-        <img width="250px" alt="Example Android" src="./examples/sklep_ecommerce/sklep_ecommerce_example_android.gif" />
+        <img width="250px" alt="Example Android" src="https://drive.google.com/uc?export=view&id=1lV18ccb8UJZkgI4Vcc5-ftLqEF0LfCBv" />
         <p>
           Android
         </p>
@@ -50,13 +50,13 @@ Personal project to capture designs for mobile apps in projects made with flutte
   <tbody>
     <tr>
       <td align="center">
-        <img width="250px" alt="Example iOS" src="./examples/banking/ios.gif" />
+        <img width="250px" alt="Example iOS" src="https://drive.google.com/uc?export=view&id=1FuofY2exP98zByf5npnyG89bZiWqiPQO" />
         <p>
           iOS
         </p>
       </td>
       <td align="center">
-        <img width="250px" alt="Example Android" src="./examples/banking/android.gif" />
+        <img width="250px" alt="Example Android" src="https://drive.google.com/uc?export=view&id=1fpgPHm8Uq65XKBzLs4ML6m7IbCdpHCDN" />
         <p>
           Android
         </p>
